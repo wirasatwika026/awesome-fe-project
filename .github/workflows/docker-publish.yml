@@ -2,18 +2,18 @@ name: Build and Publish Docker Image
 
 on:
   push:
-    branches: ["main"] # Otomatis berjalan setiap ada push ke branch main
+    branches: ["main"]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }} # Otomatis mengambil format: username-anda/nama-repo-anda
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # Izin penting agar GitHub Actions bisa menyimpan image ke GHCR Anda
+      packages: write
 
     steps:
       - name: Checkout repository
@@ -24,7 +24,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }} # Token rahasia yang otomatis disediakan GitHub
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -32,3 +32,17 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  deploy:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to k3s via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            sudo k3s kubectl rollout restart deployment/nextjs-deployment -n default
+            sudo k3s kubectl rollout status deployment/nextjs-deployment -n default
