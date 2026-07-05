@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: the inline script in layout.tsx sets .dark on <html>
+   from localStorage("theme"), falling back to the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -12,11 +17,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  color-scheme: dark;
 }
 
 body {
@@ -39,6 +43,18 @@ body {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
+/* Shiki dual-theme: light tokens are inline, dark tokens live in CSS vars */
+.shiki {
+  background-color: transparent !important;
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+}
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -58,11 +74,9 @@ body {
   animation: shimmer 1.8s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  .skeleton {
-    background: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%);
-    background-size: 200% 100%;
-  }
+.dark .skeleton {
+  background: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%);
+  background-size: 200% 100%;
 }
 
 @keyframes flip-in {
@@ -114,6 +128,17 @@ body {
 @keyframes neon-flicker {
   0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
   20%,24%,55%                      { opacity: 0.4; }
+}
+
+/* BorderBeam: animatable conic-gradient angle */
+@property --beam-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes beam-spin {
+  to { --beam-angle: 360deg; }
 }
 
 @keyframes tab-slide {
