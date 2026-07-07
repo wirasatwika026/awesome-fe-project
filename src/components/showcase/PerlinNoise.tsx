@@ -21,11 +21,13 @@ export default function PerlinNoise() {
   useEffect(() => { modeRef.current = mode; }, [mode]);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const W = 100, H = 75;
     canvas.width = W;
     canvas.height = H;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     let t = 0;
     let raf: number;
 
@@ -51,7 +53,7 @@ export default function PerlinNoise() {
       );
     }
 
-    function draw() {
+    const draw = () => {
       const img = ctx.createImageData(W, H);
       const m = modeRef.current;
 
@@ -84,7 +86,7 @@ export default function PerlinNoise() {
       ctx.putImageData(img, 0, 0);
       t += 0.018;
       raf = requestAnimationFrame(draw);
-    }
+    };
 
     draw();
     return () => cancelAnimationFrame(raf);

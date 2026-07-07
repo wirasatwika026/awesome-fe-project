@@ -93,4 +93,11 @@ export const previewLoaders: Record<
   "kanban-board":       () => import("@/components/showcase/KanbanBoard"),
   "virtualized-list":   () => import("@/components/showcase/VirtualizedList"),
   "radial-menu":        () => import("@/components/showcase/RadialMenu"),
+  "signature-pad":      () => import("@/components/showcase/SignaturePad"),
+  "data-table":         () => import("@/components/showcase/DataTable"),
+  "calendar-heatmap":   () => import("@/components/showcase/CalendarHeatmap"),
+  "markdown-preview":   () => import("@/components/showcase/MarkdownPreview"),
+  "pomodoro-timer":     () => import("@/components/showcase/PomodoroTimer"),
+  "game-of-life":       () => import("@/components/showcase/GameOfLife"),
+  "resizable-split-pane": () => import("@/components/showcase/ResizableSplitPane"),
 };

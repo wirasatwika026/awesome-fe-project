@@ -8,7 +8,6 @@ import {
 } from "@/data/showcase-meta";
 import ShowcaseCard from "@/components/ShowcaseCard";
 
-
 export default function Home() {
   const [filter, setFilter] = useState(() => {
     if (typeof window !== "undefined")
@@ -59,7 +58,7 @@ export default function Home() {
           Frontend Showcase
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
-          Awesome FE Hello World
+          Awesome FE
         </h1>
         <p className="text-zinc-500 dark:text-zinc-400 max-w-md leading-relaxed">
           A collection of beautiful frontend components — 3D, animations, scroll

@@ -755,6 +755,68 @@ export const showcaseList: ShowcaseMetaItem[] = [
     details:
       "Radial menu — items fan out from a floating action button along a circle with staggered spring transitions and reverse-order collapse.",
   },
+
+  // ── Batch 6 ──────────────────────────────────────────────────
+  {
+    slug: "signature-pad",
+    title: "Signature Pad",
+    description: "Canvas signature capture with Pointer Events and PNG export.",
+    category: "Canvas",
+    details:
+      "Smooth freehand signature capture on canvas using Pointer Events (mouse + touch), with clear and export-to-PNG via toDataURL.",
+  },
+  {
+    slug: "data-table",
+    title: "Data Table",
+    description: "Sortable columns and pagination over a sample dataset.",
+    category: "UI",
+    details:
+      "Data table with click-to-sort column headers (asc/desc toggle) and page-based pagination over a fixed sample dataset.",
+  },
+  {
+    slug: "calendar-heatmap",
+    title: "Calendar Heatmap",
+    description: "GitHub-style contribution grid with hover tooltips.",
+    category: "Canvas",
+    details:
+      "GitHub-style contribution heatmap — a 20-week grid colored by deterministic activity level, with month labels and a per-cell hover readout.",
+  },
+
+  // ── Batch 7 ──────────────────────────────────────────────────
+  {
+    slug: "markdown-preview",
+    title: "Markdown Preview",
+    description: "Live-rendered markdown editor with a side-by-side preview.",
+    category: "UI",
+    details:
+      "Textarea on the left and a live-rendered preview on the right, powered by a small hand-rolled markdown subset (headings, bold/italic, inline code, links, lists, blockquotes) rendered directly to React elements — no dangerouslySetInnerHTML.",
+  },
+  {
+    slug: "pomodoro-timer",
+    title: "Pomodoro Timer",
+    description: "25/5 work-break countdown with an animated SVG progress ring.",
+    category: "UI",
+    details:
+      "Pomodoro-style countdown timer with a circular SVG progress ring, start/pause/reset controls, and automatic switching between work and break phases.",
+  },
+
+  // ── Batch 8 ──────────────────────────────────────────────────
+  {
+    slug: "game-of-life",
+    title: "Game of Life",
+    description: "Conway's cellular automaton on canvas — click to seed cells.",
+    category: "Canvas",
+    details:
+      "Conway's Game of Life on a wrapped 48×28 grid rendered to canvas — click cells to toggle, then play, step, randomize, or clear.",
+  },
+  {
+    slug: "resizable-split-pane",
+    title: "Resizable Split Pane",
+    description: "Two panels with a drag-to-resize divider between them.",
+    category: "UI",
+    details:
+      "Two-panel layout with a draggable divider using Pointer Events and setPointerCapture, clamped between 15% and 85% width.",
+  },
 ];
 
 export const CATEGORY_ORDER = [

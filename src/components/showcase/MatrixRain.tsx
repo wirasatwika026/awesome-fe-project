@@ -6,13 +6,15 @@ export default function MatrixRain() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    function resize() {
+    const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-    }
+    };
     resize();
 
     const FONT_SIZE = 14;
@@ -24,7 +26,7 @@ export default function MatrixRain() {
 
     let rafId: number;
 
-    function draw() {
+    const draw = () => {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -44,15 +46,15 @@ export default function MatrixRain() {
       }
 
       rafId = requestAnimationFrame(draw);
-    }
+    };
 
     draw();
 
-    function onResize() {
+    const onResize = () => {
       resize();
       cols = Math.floor(canvas.width / FONT_SIZE);
       drops = new Array(cols).fill(1);
-    }
+    };
     window.addEventListener("resize", onResize);
 
     return () => {

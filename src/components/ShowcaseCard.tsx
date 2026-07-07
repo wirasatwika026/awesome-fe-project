@@ -24,13 +24,20 @@ export default function ShowcaseCard({ item, onNavigate }: Props) {
   }
 
   return (
-    <a
-      href={`/showcase/${item.slug}`}
-      onClick={onNavigate}
+    <div
       onMouseEnter={loadPreview}
       onMouseLeave={() => setHovered(false)}
-      className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors duration-200"
+      className="group relative rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors duration-200"
     >
+      {/* stretched link: whole card is clickable without wrapping preview content
+          (which may render its own <a>/interactive elements) in a nested <a> */}
+      <a
+        href={`/showcase/${item.slug}`}
+        onClick={onNavigate}
+        aria-label={item.title}
+        className="absolute inset-0 z-10 rounded-xl"
+      />
+
       {/* preview panel: placeholder blob, live component while hovered */}
       <div
         aria-hidden
@@ -80,6 +87,6 @@ export default function ShowcaseCard({ item, onNavigate }: Props) {
       <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
         {item.description}
       </p>
-    </a>
+    </div>
   );
 }

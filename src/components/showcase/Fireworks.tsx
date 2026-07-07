@@ -19,13 +19,15 @@ export default function Fireworks() {
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    function resize() {
+    const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-    }
+    };
     resize();
 
     const COLORS = [
@@ -33,7 +35,7 @@ export default function Fireworks() {
       "#c77dff", "#ff9f1c", "#ff4ff8", "#00f5d4",
     ];
 
-    function burst(x: number, y: number) {
+    const burst = (x: number, y: number) => {
       const color = COLORS[Math.floor(Math.random() * COLORS.length)];
       const count = 80 + Math.floor(Math.random() * 40);
       for (let i = 0; i < count; i++) {
@@ -50,9 +52,9 @@ export default function Fireworks() {
           trail: [],
         });
       }
-    }
+    };
 
-    function draw() {
+    const draw = () => {
       ctx.fillStyle = "rgba(0,0,0,0.18)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -66,7 +68,7 @@ export default function Fireworks() {
         p.y += p.vy;
         p.vy += 0.07;
         p.vx *= 0.99;
-        p.life -= 0.017;
+        p.life = Math.max(0, p.life - 0.017);
 
         // trail
         for (let t = 0; t < p.trail.length - 1; t++) {
@@ -86,12 +88,12 @@ export default function Fireworks() {
       }
 
       rafRef.current = requestAnimationFrame(draw);
-    }
+    };
 
-    function onClick(e: MouseEvent) {
+    const onClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       burst(e.clientX - rect.left, e.clientY - rect.top);
-    }
+    };
 
     // auto launch a burst on mount for immediate wow-factor
     setTimeout(() => burst(canvas.width / 2, canvas.height / 2), 200);

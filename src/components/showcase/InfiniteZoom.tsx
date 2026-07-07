@@ -12,13 +12,15 @@ export default function InfiniteZoom() {
   useEffect(() => { shapeRef.current = shape; }, [shape]);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    function resize() {
+    const resize = () => {
       canvas.width  = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-    }
+    };
     resize();
 
     const SCALE = 1.8;
@@ -26,7 +28,7 @@ export default function InfiniteZoom() {
     let t = 0;
     let rafId: number;
 
-    function drawShape(x: number, y: number, size: number, color: string, alpha: number) {
+    const drawShape = (x: number, y: number, size: number, color: string, alpha: number) => {
       ctx.globalAlpha = alpha;
       ctx.strokeStyle = color;
       ctx.lineWidth   = 1.5;
@@ -49,9 +51,9 @@ export default function InfiniteZoom() {
         ctx.closePath();
         ctx.stroke();
       }
-    }
+    };
 
-    function draw() {
+    const draw = () => {
       const W = canvas.width;
       const H = canvas.height;
       const cx = W / 2;
@@ -76,7 +78,7 @@ export default function InfiniteZoom() {
       ctx.globalAlpha = 1;
       t += 0.008;
       rafId = requestAnimationFrame(draw);
-    }
+    };
 
     draw();
     window.addEventListener("resize", resize);

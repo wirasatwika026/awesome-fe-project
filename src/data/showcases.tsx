@@ -7,6 +7,7 @@ import BarChart           from "@/components/showcase/BarChart";
 import BentoGrid        from "@/components/showcase/BentoGrid";
 import BlurReveal       from "@/components/showcase/BlurReveal";
 import BorderBeam       from "@/components/showcase/BorderBeam";
+import CalendarHeatmap  from "@/components/showcase/CalendarHeatmap";
 import CardStack        from "@/components/showcase/CardStack";
 import Carousel         from "@/components/showcase/Carousel";
 import CharacterMorph   from "@/components/showcase/CharacterMorph";
@@ -18,6 +19,7 @@ import ContextMenu        from "@/components/showcase/ContextMenu";
 import CopyButton         from "@/components/showcase/CopyButton";
 import CounterAnimation   from "@/components/showcase/CounterAnimation";
 import CursorFollower     from "@/components/showcase/CursorFollower";
+import DataTable          from "@/components/showcase/DataTable";
 import DatePicker         from "@/components/showcase/DatePicker";
 import Dock               from "@/components/showcase/Dock";
 import DonutChart         from "@/components/showcase/DonutChart";
@@ -27,6 +29,7 @@ import FileUpload         from "@/components/showcase/FileUpload";
 import Fireworks          from "@/components/showcase/Fireworks";
 import FlipClock          from "@/components/showcase/FlipClock";
 import FloatingLabel      from "@/components/showcase/FloatingLabel";
+import GameOfLife       from "@/components/showcase/GameOfLife";
 import Glassmorphism    from "@/components/showcase/Glassmorphism";
 import Globe            from "@/components/showcase/Globe";
 import GradientText     from "@/components/showcase/GradientText";
@@ -41,6 +44,7 @@ import LineChart          from "@/components/showcase/LineChart";
 import LiquidButton       from "@/components/showcase/LiquidButton";
 import LongPress          from "@/components/showcase/LongPress";
 import MagneticButton   from "@/components/showcase/MagneticButton";
+import MarkdownPreview  from "@/components/showcase/MarkdownPreview";
 import MasonryGrid      from "@/components/showcase/MasonryGrid";
 import MatrixRain       from "@/components/showcase/MatrixRain";
 import MorphingBlob     from "@/components/showcase/MorphingBlob";
@@ -52,17 +56,20 @@ import OTPInput           from "@/components/showcase/OTPInput";
 import ParticleField      from "@/components/showcase/ParticleField";
 import PasswordStrength   from "@/components/showcase/PasswordStrength";
 import PerlinNoise        from "@/components/showcase/PerlinNoise";
+import PomodoroTimer      from "@/components/showcase/PomodoroTimer";
 import ProgressBar        from "@/components/showcase/ProgressBar";
 import RadialMenu         from "@/components/showcase/RadialMenu";
 import RangeSlider        from "@/components/showcase/RangeSlider";
 import RatingStars        from "@/components/showcase/RatingStars";
 import ReadingProgress    from "@/components/showcase/ReadingProgress";
+import ResizableSplitPane from "@/components/showcase/ResizableSplitPane";
 import RevealOnScroll     from "@/components/showcase/RevealOnScroll";
 import RippleEffect       from "@/components/showcase/RippleEffect";
 import ScrollParallax     from "@/components/showcase/ScrollParallax";
 import ScrollProgressBar  from "@/components/showcase/ScrollProgressBar";
 import ScrollSnap         from "@/components/showcase/ScrollSnap";
 import SideDrawer         from "@/components/showcase/SideDrawer";
+import SignaturePad       from "@/components/showcase/SignaturePad";
 import SkeletonLoader     from "@/components/showcase/SkeletonLoader";
 import SnakeGame          from "@/components/showcase/SnakeGame";
 import Stepper            from "@/components/showcase/Stepper";
@@ -181,6 +188,13 @@ const registry: Record<string, ComponentEntry> = {
   "kanban-board":      { component: KanbanBoard, file: "KanbanBoard" },
   "virtualized-list":  { component: VirtualizedList, file: "VirtualizedList" },
   "radial-menu":       { component: RadialMenu, file: "RadialMenu" },
+  "signature-pad":     { component: SignaturePad, file: "SignaturePad" },
+  "data-table":        { component: DataTable, file: "DataTable" },
+  "calendar-heatmap":  { component: CalendarHeatmap, file: "CalendarHeatmap" },
+  "markdown-preview":  { component: MarkdownPreview, file: "MarkdownPreview" },
+  "pomodoro-timer":    { component: PomodoroTimer, file: "PomodoroTimer" },
+  "game-of-life":      { component: GameOfLife, file: "GameOfLife" },
+  "resizable-split-pane": { component: ResizableSplitPane, file: "ResizableSplitPane" },
 };
 
 export const showcases: Record<string, ShowcaseMeta> = Object.fromEntries(

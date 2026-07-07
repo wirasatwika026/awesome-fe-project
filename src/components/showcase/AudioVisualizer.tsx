@@ -45,16 +45,19 @@ export default function AudioVisualizer() {
     audioRef.current?.ctx.close();
     audioRef.current = null;
     setPlaying(false);
-    const canvas = canvasRef.current!;
-    canvas.getContext("2d")!.clearRect(0, 0, canvas.width, canvas.height);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.getContext("2d")?.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   function drawLoop(analyser: AnalyserNode) {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const buf = new Uint8Array(analyser.frequencyBinCount);
 
-    function frame() {
+    const frame = () => {
       analyser.getByteFrequencyData(buf);
       const W = canvas.width;
       const H = canvas.height;
@@ -69,7 +72,7 @@ export default function AudioVisualizer() {
       });
 
       rafRef.current = requestAnimationFrame(frame);
-    }
+    };
     frame();
   }
 

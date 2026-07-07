@@ -13,18 +13,20 @@ export default function WaveAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    function resize() {
+    const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
-    }
+    };
     resize();
 
     let rafId: number;
 
-    function draw(ts: number) {
+    const draw = (ts: number) => {
       const W = canvas.width;
       const H = canvas.height;
       const t = ts / 1000;
@@ -64,7 +66,7 @@ export default function WaveAnimation() {
       }
 
       rafId = requestAnimationFrame(draw);
-    }
+    };
 
     rafId = requestAnimationFrame(draw);
 

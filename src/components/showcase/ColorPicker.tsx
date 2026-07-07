@@ -34,7 +34,8 @@ export default function ColorPicker() {
   const drawSquare = useCallback(() => {
     const canvas = sqRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const { width: W, height: H } = canvas;
 
     const gH = ctx.createLinearGradient(0, 0, W, 0);
@@ -54,7 +55,8 @@ export default function ColorPicker() {
   useEffect(() => {
     const canvas = hueRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const g = ctx.createLinearGradient(0, 0, canvas.width, 0);
     for (let i = 0; i <= 360; i += 30) g.addColorStop(i / 360, `hsl(${i},100%,50%)`);
     ctx.fillStyle = g;

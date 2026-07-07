@@ -26,25 +26,27 @@ export default function DrawingCanvas() {
   function setToolVal(t: "pen" | "eraser") { toolRef.current = t; setTool(t); }
 
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
     ctx.fillStyle = "#fafafa";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    function pos(e: MouseEvent) {
+    const pos = (e: MouseEvent) => {
       const r = canvas.getBoundingClientRect();
       return { x: e.clientX - r.left, y: e.clientY - r.top };
-    }
+    };
 
-    function down(e: MouseEvent) {
+    const down = (e: MouseEvent) => {
       drawing.current = true;
       lastPos.current = pos(e);
-    }
+    };
 
-    function move(e: MouseEvent) {
+    const move = (e: MouseEvent) => {
       if (!drawing.current) return;
       const p = pos(e);
       ctx.beginPath();
@@ -56,9 +58,9 @@ export default function DrawingCanvas() {
       ctx.lineTo(p.x, p.y);
       ctx.stroke();
       lastPos.current = p;
-    }
+    };
 
-    function up() { drawing.current = false; }
+    const up = () => { drawing.current = false; };
 
     canvas.addEventListener("mousedown", down);
     canvas.addEventListener("mousemove", move);
